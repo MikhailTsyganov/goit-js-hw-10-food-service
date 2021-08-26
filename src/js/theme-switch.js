@@ -1,5 +1,5 @@
 
-const Theme = {
+const theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme',
 };
@@ -9,13 +9,16 @@ const Theme = {
 const bodyEl = document.querySelector('body');
 const checkBoxEl = document.querySelector('.theme-switch__toggle');
 
+
+if (localStorage.getItem('theme') !== theme.DARK) {
+    bodyEl.classList.add(theme.LIGHT)
+} 
+
 checkBoxEl.addEventListener('change', onClickCheckBox);
 
 onChangeThemeReloadPage();
 
-function onClickCheckBox(e, { DARK, LIGHT } = Theme) {
-    // const value = e.currentTarget
-    // console.log(value);
+function onClickCheckBox(e, { DARK, LIGHT } = theme) {
 
     bodyEl.classList.toggle(DARK)
     localStorage.setItem('theme', DARK)
@@ -29,13 +32,9 @@ function onClickCheckBox(e, { DARK, LIGHT } = Theme) {
 }
 
 
-function onChangeThemeReloadPage({ DARK, LIGHT } = Theme) {
+function onChangeThemeReloadPage({ DARK, LIGHT } = theme) {
     if (localStorage.getItem('theme') === DARK) {
         bodyEl.classList.add(DARK);
         checkBoxEl.checked = "true";
     }
-
-    // if (localStorage.getItem('theme') === LIGHT) {
-    //     bodyEl.classList.add(LIGHT)
-    // }
 }
